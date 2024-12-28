@@ -1,0 +1,106 @@
+{
+  "terms": [
+    {
+      "title": "Микросервисы",
+      "description": "Архитектурный стиль, при котором приложение разбивается на набор независимых сервисов с собственной логикой и базой данных.",
+      "source": "Wikipedia"
+    },
+    {
+      "title": "Kotlin",
+      "description": "Современный статически типизированный язык программирования, разработанный JetBrains, сочетающий объектно-ориентированный и функциональный подход.",
+      "source": "Official Kotlin Website"
+    },
+    {
+      "title": "Docker",
+      "description": "Платформа контейнеризации для упаковки и изолированного запуска приложений с помощью контейнеров.",
+      "source": "Official Docker Docs"
+    },
+    {
+      "title": "Kubernetes",
+      "description": "Система оркестрации контейнеров для автоматизации развертывания, масштабирования и управления контейнеризованными приложениями.",
+      "source": "Official Kubernetes Docs"
+    },
+    {
+      "title": "Spring Boot",
+      "description": "Фреймворк на базе Spring, упрощающий создание производственных приложений на языке Java и Kotlin.",
+      "source": "Official Spring Docs"
+    },
+    {
+      "title": "REST",
+      "description": "Стиль архитектуры веб-сервисов, основанный на использовании HTTP-запросов для доступа к ресурсам.",
+      "source": "Wikipedia"
+    },
+    {
+      "title": "API Gateway",
+      "description": "Шаблон проектирования, обеспечивающий единую точку входа для запросов к микросервисам, маршрутизируя трафик.",
+      "source": "Nginx Docs"
+    },
+    {
+      "title": "Service Discovery",
+      "description": "Механизм, позволяющий микросервисам автоматически находить друг друга в распределённой среде.",
+      "source": "HashiCorp Consul Docs"
+    },
+    {
+      "title": "Load Balancing",
+      "description": "Механизм распределения трафика между несколькими сервисами для повышения производительности и отказоустойчивости.",
+      "source": "Wikipedia"
+    },
+    {
+      "title": "CI/CD",
+      "description": "Набор практик и инструментов для автоматизации сборки, тестирования и развертывания приложений.",
+      "source": "Jenkins Docs"
+    }
+  ],
+  "relationships": [
+    {
+      "source": "Микросервисы",
+      "target": "Kubernetes",
+      "relation": "разворачиваются с использованием"
+    },
+    {
+      "source": "Docker",
+      "target": "Kubernetes",
+      "relation": "управляется посредством"
+    },
+    {
+      "source": "Kotlin",
+      "target": "Spring Boot",
+      "relation": "используется в"
+    },
+    {
+      "source": "Spring Boot",
+      "target": "Микросервисы",
+      "relation": "позволяет быстро создавать"
+    },
+    {
+      "source": "API Gateway",
+      "target": "Микросервисы",
+      "relation": "маршрутизирует запросы к"
+    },
+    {
+      "source": "Service Discovery",
+      "target": "Микросервисы",
+      "relation": "автоматизирует поиск"
+    },
+    {
+      "source": "REST",
+      "target": "API Gateway",
+      "relation": "использует протокол для"
+    },
+    {
+      "source": "CI/CD",
+      "target": "Docker",
+      "relation": "автоматизирует упаковку в"
+    },
+    {
+      "source": "Load Balancing",
+      "target": "Микросервисы",
+      "relation": "распределяет нагрузку между"
+    },
+    {
+      "source": "Kotlin",
+      "target": "Микросервисы",
+      "relation": "подходит для разработки"
+    }
+  ]
+}

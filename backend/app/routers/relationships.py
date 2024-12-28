@@ -4,7 +4,7 @@ from typing import List
 from ..database import get_db
 from .. import crud, schemas
 
-router = APIRouter(prefix="/relationship", tags=["Relationship"])
+router = APIRouter(prefix="/relationships", tags=["Relationship"])
 
 
 @router.get("/", response_model=List[schemas.RelationshipOut])
