@@ -3,7 +3,7 @@ import ReactFlow, {
     Node,
     Edge,
     useNodesState,
-    useEdgesState,
+    useEdgesState, MarkerType,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
@@ -34,11 +34,13 @@ const MindMap: React.FC<MindMapProps> = ({terms, relationships}) => {
             source: rel.source_id.toString(),
             target: rel.target_id.toString(),
             label: rel.relation,
+            markerEnd: {
+                type: MarkerType.ArrowClosed,
+            }
         }));
 
-        // 3) Авто-расстановка Dagre
+        // расстановка Dagre
         const {layoutedNodes, layoutedEdges} = getLayoutedElements(rawNodes, rawEdges, 'LR');
-
         setNodes(layoutedNodes);
         setEdges(layoutedEdges);
     }, [terms, relationships, setNodes, setEdges]);
