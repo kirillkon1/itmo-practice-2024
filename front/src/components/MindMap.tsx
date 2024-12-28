@@ -1,63 +1,57 @@
-// MindMap.tsx
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactFlow, {
-    Background,
-    Controls,
-    MiniMap,
+    Node,
+    Edge,
     useNodesState,
     useEdgesState,
-    Edge,
-    Node, MarkerType,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-const initialNodes: Node[] = [
-    {
-        id: '1',
-        data: { label: 'Термин 1' },
-        position: { x: 100, y: 100 },
-    },
-    {
-        id: '2',
-        data: { label: 'Термин 2' },
-        position: { x: 400, y: 100 },
-    },
-];
+import {Term, Relationship} from '../api/models';
+import {getLayoutedElements} from '../utils/dagreLayout';
 
-const initialEdges: Edge[] = [
-    {
-        id: 'e1-2',
-        source: '1',
-        target: '2',
-        label: 'принадлежит',
-        type: 'smoothstep',
-        labelStyle: { fill: 'black', fontWeight: 300 },
-        markerEnd: {
-            type: MarkerType.ArrowClosed,
-            color: 'black',      // цвет стрелки
-            strokeWidth: 2,     // толщина границы стрелки
-        }
-    },
-];
+interface MindMapProps {
+    terms: Term[];
+    relationships: Relationship[];
+}
 
-const MindMap: React.FC = () => {
-    const [nodes,  , onNodesChange] = useNodesState(initialNodes);
-    const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+const MindMap: React.FC<MindMapProps> = ({terms, relationships}) => {
+    const [nodes, setNodes, onNodesChange] = useNodesState([]);
+    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+    useEffect(() => {
+        // terms -> Node[]
+        const rawNodes: Node[] = terms.map((term) => ({
+            id: term.id.toString(),
+            data: {label: term.title},
+            // Изначально (0,0), Dagre расставит
+            position: {x: 0, y: 0},
+        }));
+
+        // relationships -> Edge[]
+        const rawEdges: Edge[] = relationships.map((rel) => ({
+            id: rel.id.toString(),
+            source: rel.source_id.toString(),
+            target: rel.target_id.toString(),
+            label: rel.relation,
+        }));
+
+        // 3) Авто-расстановка Dagre
+        const {layoutedNodes, layoutedEdges} = getLayoutedElements(rawNodes, rawEdges, 'LR');
+
+        setNodes(layoutedNodes);
+        setEdges(layoutedEdges);
+    }, [terms, relationships, setNodes, setEdges]);
 
     return (
-        <div style={{ width: '100%', height: 600 }}>
+        <div style={{width: '100%', height: 600}}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
                 onNodesChange={onNodesChange}
-                nodesConnectable={false}
                 onEdgesChange={onEdgesChange}
                 fitView
-            >
-                <MiniMap />
-                <Controls />
-                <Background color="#aaa" gap={16} />
-            </ReactFlow>
+            />
         </div>
     );
 };

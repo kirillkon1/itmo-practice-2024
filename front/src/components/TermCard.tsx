@@ -1,10 +1,5 @@
 import React from 'react';
-
-export interface Term {
-    id: number;
-    title: string;
-    description: string;
-}
+import {Term} from "../api/models.ts";
 
 interface TermCardProps {
     term: Term;

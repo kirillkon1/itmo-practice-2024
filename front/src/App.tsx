@@ -1,26 +1,59 @@
-// src/App.tsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import TermsPage from './pages/TermsPage';
-import MindMapPage from './pages/MindMapPage';
-import Header from "./components/Header.tsx"; // если у вас есть страница с майндкартой
+import {useEffect, useState} from 'react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
-// Пример данных терминов
-const termsData = [
-    { id: 1, title: 'Термин 1', description: 'Описание термина 1' },
-    { id: 2, title: 'Термин 2', description: 'Описание термина 2' },
-    { id: 3, title: 'Термин 3', description: 'Описание термина 3' },
-];
+import MindMapPage from './pages/MindMapPage';
+import TermsPage from './pages/TermsPage';
+import {Term, Relationship} from './api/models';
+import Header from "./components/Header.tsx";
 
 function App() {
-    return (
-        <Router>
-            <Header/>
+    const [terms, setTerms] = useState<Term[]>([]);
+    const [relationships, setRelationships] = useState<Relationship[]>([]);
+    const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        (async function fetchData() {
+            try {
+                // Запрос терминов
+                const respTerms = await fetch('http://localhost:8000/terms')
+                    .then(res => res?.json());
+
+                // Запрос связей
+                const respRels = await fetch('http://localhost:8000/relationships')
+                    .then(res => res?.json());
+
+                setTerms(respTerms);
+                setRelationships(respRels);
+            } catch (error) {
+                console.error('Ошибка при загрузке:', error);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, []);
+
+    if (loading) {
+        return <div>Загрузка...</div>;
+    }
+
+    return (
+        <BrowserRouter>
+            <Header/>
             <Routes>
-                <Route path="/" element={<MindMapPage />} />
-                <Route path="/terms" element={<TermsPage terms={termsData} />} />
+                <Route
+                    path="/"
+                    element={
+                        <MindMapPage terms={terms} relationships={relationships}/>
+                    }
+                />
+                <Route
+                    path="/terms"
+                    element={
+                        <TermsPage terms={terms}/>
+                    }
+                />
             </Routes>
-        </Router>
+        </BrowserRouter>
     );
 }
 

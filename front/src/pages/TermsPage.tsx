@@ -1,6 +1,6 @@
-// src/pages/TermsPage.tsx
 import React from 'react';
-import TermCard, { Term } from '../components/TermCard';
+import TermCard from '../components/TermCard';
+import { Term } from '../api/models';
 
 interface TermsPageProps {
     terms: Term[];
@@ -9,15 +9,8 @@ interface TermsPageProps {
 const TermsPage: React.FC<TermsPageProps> = ({ terms }) => {
     return (
         <div style={{ padding: '1rem' }}>
-            <h2 style={{ marginBottom: '1rem' }}>Список терминов</h2>
-
-            <div
-                style={{
-                    display: 'flex',
-                    gap: '1rem',
-                    flexWrap: 'wrap',
-                }}
-            >
+            <h2>Список терминов</h2>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
                 {terms.map((term) => (
                     <TermCard key={term.id} term={term} />
                 ))}

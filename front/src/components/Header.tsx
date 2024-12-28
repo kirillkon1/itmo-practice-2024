@@ -1,20 +1,16 @@
-// src/components/Header.tsx
 import React from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import {FaGithub} from 'react-icons/fa';
 import {FaBrain, FaBookOpen} from 'react-icons/fa';
 
 const GITHUB_REPO_URL = 'https://github.com/kirillkon1';
-// <-- Замените на нужную ссылку или удалите, если не нужно
 
 const Header: React.FC = () => {
     const location = useLocation();
 
-    // Проверяем, какой маршрут сейчас активен
     const isMindmapActive = location.pathname === '/';
     const isTermsActive = location.pathname === '/terms';
 
-    // Базовые стили для «кнопки»
     const baseBtnStyle: React.CSSProperties = {
         display: 'inline-flex',
         alignItems: 'center',
@@ -42,7 +38,7 @@ const Header: React.FC = () => {
                 boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
                 color: "#fff",
                 backgroundColor: '#000',
-                zIndex: 2, // чуть выше остальных
+                zIndex: 2,
             };
         }
         return {};
@@ -60,9 +56,7 @@ const Header: React.FC = () => {
                 justifyContent: 'space-between',
             }}
         >
-            {/* Левая часть: кнопки перехода */}
             <div>
-                {/* MindMap Button */}
                 <Link
                     to="/"
                     style={{
@@ -73,8 +67,6 @@ const Header: React.FC = () => {
                     <FaBrain/>
                     MindMap
                 </Link>
-
-                {/* TermsPage Button */}
                 <Link
                     to="/terms"
                     style={{

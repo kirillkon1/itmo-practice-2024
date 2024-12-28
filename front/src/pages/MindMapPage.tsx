@@ -1,12 +1,17 @@
-// src/pages/MindMapPage.tsx
 import React from 'react';
-import MindMap from '../components/MindMap'; // ваш компонент c React Flow
+import MindMap from '../components/MindMap';
+import { Term, Relationship } from '../api/models';
 
-const MindMapPage: React.FC = () => {
+interface MindMapPageProps {
+    terms: Term[];
+    relationships: Relationship[];
+}
+
+const MindMapPage: React.FC<MindMapPageProps> = ({ terms, relationships }) => {
     return (
         <div style={{ padding: '1rem' }}>
             <h2>MindMap</h2>
-            <MindMap />
+            <MindMap terms={terms} relationships={relationships} />
         </div>
     );
 };
