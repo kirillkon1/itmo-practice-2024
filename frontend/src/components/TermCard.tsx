@@ -32,17 +32,30 @@ const TermCard: React.FC<TermCardProps> = ({term}) => {
                 width: '220px',
                 padding: '1rem',
                 borderRadius: '8px',
-                boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-                transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease',
                 backgroundColor: '#fff',
-                color: '#000000',
+                color: '#000',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
             }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <h3 style={{margin: '0 0 0.5rem 0'}}>{term.title}</h3>
-            <p style={{margin: 0}}>{term.description}</p>
+            <div>
+                <h3 style={{margin: '0 0 0.5rem 0', fontSize: '1.2rem', fontWeight: '600'}}>
+                    {term.title}
+                </h3>
+                <p style={{margin: '0 0 1rem 0', lineHeight: '1.4', color: '#333'}}>
+                    {term.description}
+                </p>
+            </div>
+            <p style={{margin: 0, fontSize: '0.85rem', color: '#666', textAlign: 'right'}}>
+                {term.source}
+            </p>
         </div>
+
     );
 };
 

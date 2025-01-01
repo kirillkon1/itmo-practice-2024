@@ -3,7 +3,7 @@ import {Link, useLocation} from 'react-router-dom';
 import {FaGithub} from 'react-icons/fa';
 import {FaBrain, FaBookOpen} from 'react-icons/fa';
 
-const GITHUB_REPO_URL = 'https://github.com/kirillkon1';
+const GITHUB_REPO_URL = 'https://github.com/kirillkon1/itmo-practice-2024';
 
 const Header: React.FC = () => {
     const location = useLocation();
