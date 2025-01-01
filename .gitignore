@@ -1,3 +1,4 @@
 /backend/venv
+/backend/test.db
+/backend/sql/fill-example.sql
 .idea
-/.env
